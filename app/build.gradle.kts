@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace = "com.hanbi.movie"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.hanbi.movie"
         minSdk = 33
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -33,6 +33,9 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+    buildFeatures{
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -45,4 +48,13 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    // https://mvnrepository.com/artifact/com.squareup.retrofit2/converter-gson
+    implementation("com.squareup.retrofit2:converter-gson:2.11.0")
+    // https://mvnrepository.com/artifact/com.squareup.retrofit2/retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.11.0")
+    // https://mvnrepository.com/artifact/com.github.bumptech.glide/glide
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+    // https://mvnrepository.com/artifact/com.android.volley/volley
+    implementation("com.android.volley:volley:1.2.1")
 }
