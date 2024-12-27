@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .replace(R.id.activity_content, volleyFragment)
             .commit()
-        supportActionBar?.title="Volley Test"
+        supportActionBar?.title="현재 상영중"
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -43,12 +43,6 @@ class MainActivity : AppCompatActivity() {
                 .commit()
             mode="volley"
             supportActionBar?.title="Volley Test"
-        }else if(item.itemId === R.id.menu_retrofit && mode !== "retrofit"){
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.activity_content, retrofitFragment)
-                .commit()
-            mode="retrofit"
-            supportActionBar?.title="Retrofit Test"
         }
         return super.onOptionsItemSelected(item)
     }

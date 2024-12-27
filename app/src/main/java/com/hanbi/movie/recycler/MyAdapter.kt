@@ -22,8 +22,8 @@ class MyAdapter(val context : Context, val datas : MutableList<ItemModel>?) :
             val model = datas!![position]
             binding.itemTitle.text = model.title
             binding.itemAdult.text = model.adult
-            binding.itemReleaseDate.text = "released At ${model.release_date}"
-            binding.itemVote.text = "rate : ${model.vote_average}"
+            binding.itemReleaseDate.text = "출시 ${model.release_date}"
+            binding.itemVote.text = "평균 별점 : ${model.vote_average}"
 
         val okHttpClient = OkHttpClient.Builder()
             .addInterceptor { chain ->
@@ -40,6 +40,7 @@ class MyAdapter(val context : Context, val datas : MutableList<ItemModel>?) :
 
         Glide.with(context)
             .load(glideUrl)
+            .override(1280,1280)
             .into(binding.itemPoster)
     }
 
