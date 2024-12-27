@@ -45,6 +45,7 @@ class VolleyFragment : Fragment(){
             url,
             null,
             Response.Listener<JSONObject> { response ->
+                Log.d("API Response", "Response: $response")
                 try {
                     val jsonArray = response.getJSONArray("results")
                     val mutableList = mutableListOf<ItemModel>()
@@ -54,25 +55,26 @@ class VolleyFragment : Fragment(){
                             adult  = article.optString("adult", "Unknown")
                             title = article.optString("title", "No Title")
                             release_date = article.optString("release_date", "No Date")
-                            poster_path = article.optString("poster_path", "null")
-                            vote_average = article.optString("vote_average", "0")
+                            poster_path = article.optString("poster_path", "No Poster")
+                            vote_average = article.optString("vote_average", "nothing....")
                             mutableList.add(this)
                         }
 
                     }
-
+                    println("successfully connected to api .. congrats..")
                     // RecyclerView에 데이터 연결
                     binding.volleyRecyclerView.layoutManager = LinearLayoutManager(requireContext())
                     binding.volleyRecyclerView.adapter = MyAdapter(activity as Context, mutableList)
                 } catch (e: Exception) {
-                    Log.e("VolleyError", "Error parsing JSON: ${e.message}")
+                    Log.e("VolleyError", "Error parsing JSON: ${e.message ?: e.toString()}")
                 }
             },
             Response.ErrorListener { error ->
                 println("error,,,,,,,,,$error") }) {
             override fun getHeaders(): MutableMap<String, String> {
                 val map = mutableMapOf<String, String>(
-                    "User-agent" to MyApplication.USER_AGENT
+                    "accept" to "application/json",
+                    "Authorization" to "Bearer ${MyApplication.API_KEY}"
                 )
                 return map
             }

@@ -9,7 +9,7 @@ import retrofit2.http.Query
 
 interface NetworkService {
 
-    @GET("/movie/now_playing")
+    @GET("movie/now_playing")
     fun getMovie(
         @Query("language") language: String,
         @Query("page") page: Long

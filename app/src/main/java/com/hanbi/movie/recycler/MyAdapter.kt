@@ -1,6 +1,7 @@
 package com.hanbi.movie.recycler
 
 import android.content.Context
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -24,9 +25,10 @@ class MyAdapter(val context : Context, val datas : MutableList<ItemModel>?) :
                 .into(binding.itemPoster)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        TODO("Not yet implemented")
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder
+            = MyViewHolder(ItemMainBinding.inflate(LayoutInflater.from(parent.context), parent, false))
 
-    override fun getItemCount(): Int = datas!!.size
+    override fun getItemCount(): Int{
+        return datas?.size ?: 0
+    }
 }
