@@ -25,10 +25,12 @@ class VolleyFragment : Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = FragmentVolleyBinding.inflate(inflater, container, false)
+        _binding = FragmentVolleyBinding.inflate(inflater, container, false)  // _binding 설정
 
         // 데이터 로드 및 UI 초기화
         loadData()
+
+
 
         return binding.root
     }
@@ -45,23 +47,31 @@ class VolleyFragment : Fragment(){
             url,
             null,
             Response.Listener<JSONObject> { response ->
-                Log.d("API Response", "Response: $response")
                 try {
                     val jsonArray = response.getJSONArray("results")
                     val mutableList = mutableListOf<ItemModel>()
                     for (i in 0 until jsonArray.length()) {
-                        val article = jsonArray.getJSONObject(i)
-                        val item = ItemModel().apply {
-                            adult  = article.optString("adult", "Unknown")
-                            title = article.optString("title", "No Title")
-                            release_date = article.optString("release_date", "No Date")
-                            poster_path = article.optString("poster_path", "No Poster")
-                            vote_average = article.optString("vote_average", "nothing....")
-                            mutableList.add(this)
+                        ItemModel().run {
+                            val article = jsonArray.getJSONObject(i)
+
+                            val item = ItemModel().apply {
+                                adult  = article.optString("adult", "Unknown")
+                                if(adult == "false"){
+                                    adult = "청소년 관람 가능"
+                                }else{
+                                    adult = "청소년 관람 불가"
+                                }
+                                title = article.optString("title", "No Title")
+                                release_date = article.optString("release_date", "No Date")
+                                poster_path = article.optString("poster_path", "No Poster")
+                                vote_average = article.optString("vote_average", "nothing....")
+                                mutableList.add(this)
+                            }
+
                         }
 
                     }
-                    println("successfully connected to api .. congrats..")
+
                     // RecyclerView에 데이터 연결
                     binding.volleyRecyclerView.layoutManager = LinearLayoutManager(requireContext())
                     binding.volleyRecyclerView.adapter = MyAdapter(activity as Context, mutableList)
