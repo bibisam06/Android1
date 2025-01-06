@@ -9,8 +9,8 @@ android {
 
     defaultConfig {
         applicationId = "com.hanbi.movie"
-        minSdk = 33
-        targetSdk = 35
+        minSdk = 35
+        targetSdk = 33
         versionCode = 1
         versionName = "1.0"
 

@@ -25,13 +25,8 @@ class VolleyFragment : Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentVolleyBinding.inflate(inflater, container, false)  // _binding 설정
-
-        // 데이터 로드 및 UI 초기화
+        _binding = FragmentVolleyBinding.inflate(inflater, container, false)
         loadData()
-
-
-
         return binding.root
     }
 
@@ -72,7 +67,7 @@ class VolleyFragment : Fragment(){
 
                     }
 
-                    // RecyclerView에 데이터 연결
+
                     binding.volleyRecyclerView.layoutManager = LinearLayoutManager(requireContext())
                     binding.volleyRecyclerView.adapter = MyAdapter(activity as Context, mutableList)
                 } catch (e: Exception) {
